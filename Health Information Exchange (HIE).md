@@ -107,8 +107,8 @@ One of the most valuable HIE services. When your patient shows up at another fac
 
 | Network | Scope | Notes |
 |---------|-------|-------|
-| **State/Regional HIEs** | State or metro area | Examples: Healthix (NY), CRISP (MD), Indiana HIE |
-| **Carequality** | National framework | Enables HIE-to-HIE connections. Not an HIE itself. |
+| **State/Regional HIEs** | State or metro area | See [detail section below](#major-stateregional-hies-in-detail). Examples: Healthix (NY), CRISP (MD), IHIE (IN). |
+| **Carequality** | National framework | Enables HIE-to-HIE connections. Not a QHIN itself — a separate Sequoia Project framework. |
 | **CommonWell Health Alliance** | National network | Founded by EHR vendors (not Epic). Partners with Carequality. |
 | **Epic Care Everywhere** | Epic-to-Epic | Epic's own network. Connects all Epic hospitals. Massive. |
 | **eHealth Exchange** | National | One of the oldest networks. Federal agencies participate. |
@@ -119,14 +119,51 @@ One of the most valuable HIE services. When your patient shows up at another fac
 ```
 TEFCA (National Framework)
   └── QHINs (Qualified Health Information Networks)
-        ├── Carequality ←→ connects to many HIEs
+        ├── eHealth Exchange ←→ connects to many HIEs and federal agencies
         │     ├── State HIE 1
         │     ├── State HIE 2
-        │     └── Epic Care Everywhere
-        ├── CommonWell
-        ├── eHealth Exchange
-        └── Other QHINs
+        │     └── Carequality participants (via eHealth Exchange)
+        ├── Epic Nexus  ←→ all Epic hospitals
+        ├── CommonWell  ←→ non-Epic EHRs (Cerner/athena/etc.)
+        ├── KONZA, MedAllies, Health Gorilla, Kno2, Oracle Health
+        └── (8 designated QHINs total — see [[QHIN and TEFCA]])
 ```
+
+---
+
+## Major State/Regional HIEs (in Detail)
+
+Beyond the national QHINs, dozens of state and regional HIEs operate as sub-national networks. Most connect into TEFCA through a QHIN rather than running their own. The handful below are the ones a US developer is most likely to encounter:
+
+### 1. Healthix (New York)
+- **Region:** New York City, Long Island, and lower NY state. The largest single-region HIE in the US (~22M patient records).
+- **Example:** A Manhattan ED queries Healthix on patient arrival and instantly sees prior visits across multiple unrelated hospital systems in the city — without setting up a single point-to-point integration.
+
+### 2. CRISP (Maryland, DC, West Virginia)
+- **Region:** State-mandated HIE for Maryland; expanded into DC and West Virginia. Often cited as the model US state HIE.
+- **Example:** A Maryland hospital admits a patient — within seconds, CRISP fires an ADT notification to the patient's PCP and surfaces their controlled-substance prescription history (CRISP runs the state PDMP).
+
+### 3. Indiana Health Information Exchange (IHIE)
+- **Region:** Indiana statewide. One of the oldest HIEs in the US (founded in the 1990s), now serving most major Indiana health systems.
+- **Example:** A small clinic in Bloomington pulls a patient's discharge summary from a hospital in Indianapolis via IHIE — no bilateral interface required.
+
+### 4. Manifest MedEx (California)
+- **Region:** California's largest nonprofit HIE, formed from the merger of Cal INDEX and Inland Empire HIE.
+- **Example:** A telehealth visit in Los Angeles fetches the patient's recent Northern California lab results through Manifest MedEx in real time during intake.
+
+### 5. MiHIN (Michigan Health Information Network)
+- **Region:** Michigan statewide. State-designated entity, strong public-health and care-coordination integrations.
+- **Example:** A patient discharged from a Detroit hospital triggers a MiHIN ADT notification that fans out to their PCP, care manager, and home-health agency statewide.
+
+### How State/Regional HIEs Connect to TEFCA
+
+Most regional HIEs don't run their own QHIN — they connect to TEFCA through one of the 8 designated QHINs. Common pathways:
+
+- A state HIE joins **eHealth Exchange** as a Participant — by far the most common route.
+- Some partner with **KONZA** (which itself started as the Kansas state HIE) as a sub-QHIN.
+- Epic-heavy regions effectively reach TEFCA through **Epic Nexus** instead of a separate HIE connection.
+
+> **Note:** Many state HIEs that existed in 2014–2018 have shut down or consolidated due to funding pressure (the federal HITECH grants that launched most of them expired). The list above reflects the consolidated 2025 landscape.
 
 ---
 
