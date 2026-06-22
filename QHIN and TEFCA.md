@@ -55,19 +55,60 @@ A QHIN is an organization that has been **approved/designated** under TEFCA to s
 
 > **Analogy:** QHINs are like **Tier 1 ISPs** (AT&T, Comcast, Verizon at the backbone level). They peer with each other and provide connectivity to smaller networks (regional HIEs, hospitals). You don't connect directly to the internet backbone — you connect through an ISP. Similarly, you don't connect directly to TEFCA — you connect through a QHIN.
 
-> **Real-world example:** A small rural clinic in Kansas can't afford to build connections to every hospital network in the country. Instead, they connect to KONZA (a QHIN), and through KONZA they can query patient records from any other QHIN — Epic Nexus, Carequality, CommonWell, etc. One connection, nationwide reach.
+> **Real-world example:** A small rural clinic in Kansas can't afford to build connections to every hospital network in the country. Instead, they connect to KONZA (a QHIN), and through KONZA they can query patient records from any other QHIN — Epic Nexus, eHealth Exchange, CommonWell, etc. One connection, nationwide reach.
 
 ### Designated QHINs (as of 2025)
+
+The ONC has designated **8 national QHINs**. Each one is a distinct on-ramp to TEFCA serving a different ecosystem.
+
 | QHIN | Background |
 |------|-----------|
-| **Carequality** | Sequoia Project. Already connects many HIEs and Epic. |
 | **eHealth Exchange** | The Sequoia Project. One of the oldest national networks. |
-| **CommonWell Health Alliance** | Founded by Cerner, Athenahealth, others. |
-| **KONZA** | Kansas-based. Serves rural and critical access hospitals. |
 | **Epic Nexus** | Epic's QHIN for Epic-connected organizations. |
-| **MedAllies** | Focuses on Direct messaging and smaller practices. |
 | **Health Gorilla** | Clinical data network, strong in lab/diagnostics. |
+| **KONZA** | Kansas-based. Serves rural and critical access hospitals. |
+| **MedAllies** | Focuses on Direct messaging and smaller practices. |
 | **Kno2** | Document exchange platform (see [[Kno2]]). |
+| **CommonWell Health Alliance** | Founded by Cerner, Athenahealth, others. |
+| **Oracle Health Interoperability Services** | Oracle's QHIN for Oracle Health (formerly Cerner) customers. |
+
+> **Note on Carequality:** Carequality is often mistaken for a QHIN, but it is a **separate interoperability framework** also operated by The Sequoia Project. Its participants typically route into TEFCA via **eHealth Exchange** (which IS a QHIN). If you see "Carequality" in marketing materials about TEFCA, mentally translate it as "eHealth Exchange QHIN."
+
+### National QHINs in Detail
+
+Each QHIN serves a distinct ecosystem. The practical developer question: *which QHIN does my customer organization sit behind?* — that determines integration scope and which network you can reach.
+
+#### 1. eHealth Exchange
+- **Specialty:** Federal agencies (VA, DoD, SSA, CMS). Oldest national network.
+- **Example:** A VA hospital pulls civilian medical records for a veteran being treated at a private hospital, via eHealth Exchange.
+
+#### 2. Epic Nexus
+- **Specialty:** All Epic-deployed hospitals. Largest by patient volume (~38% of US records).
+- **Example:** An Epic hospital in Texas queries records on a patient seen at a non-Epic clinic; the request routes Epic Nexus → another QHIN → that clinic.
+
+#### 3. Health Gorilla
+- **Specialty:** Clinical/lab data; popular with digital health startups and telehealth platforms.
+- **Example:** A telehealth app fetches a new patient's recent lab results during virtual intake via Health Gorilla's API.
+
+#### 4. KONZA
+- **Specialty:** Rural and critical-access hospitals. Started as a Kansas state HIE.
+- **Example:** A small rural hospital in Iowa connects only to KONZA and gains nationwide query reach without joining an EHR vendor's network.
+
+#### 5. MedAllies
+- **Specialty:** Direct messaging + small/mid provider practices. Operates a major DirectTrust HISP.
+- **Example:** A small PCP practice sends a referral CCDA via Direct messaging; MedAllies bridges that into TEFCA on the back end.
+
+#### 6. Kno2
+- **Specialty:** Document exchange. Abstracts Direct, HIE, and TEFCA behind one REST/FHIR API. See [[Kno2]].
+- **Example:** A SaaS health app POSTs a CCDA to Kno2's API; Kno2 picks Direct, TEFCA, or a fax fallback and delivers it.
+
+#### 7. CommonWell Health Alliance
+- **Specialty:** Non-Epic EHRs (founded by Cerner, athenahealth, and others as the "anti-Care-Everywhere" alliance).
+- **Example:** A Cerner hospital queries CommonWell for a patient's records and gets fan-out responses from athena, eClinicalWorks, and other member EHRs.
+
+#### 8. Oracle Health Interoperability Services
+- **Specialty:** Oracle Health (formerly Cerner) hospitals. The Oracle equivalent of Epic Nexus.
+- **Example:** An Oracle Health hospital receives records pushed from another QHIN during a patient's emergency visit, without manual lookup.
 
 ### How a QHIN Works
 
@@ -81,7 +122,7 @@ Your Organization (Participant)
 Sub-QHIN (optional intermediary, like a state HIE)
      |
      v
-QHIN (e.g., Carequality)
+QHIN (e.g., eHealth Exchange)
      |
      v  ← TEFCA Common Agreement governs this connection
 Other QHINs
