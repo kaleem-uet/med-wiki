@@ -155,8 +155,8 @@ Modern App → FHIR API → Adapter/Facade → Legacy System (proprietary DB or 
 |---------|-------------|
 | **PIX/PDQ** | Patient Identifier Cross-referencing / Patient Demographics Query |
 | **XDS** | Cross-Enterprise Document Sharing (document registries/repositories) |
-| **XCA** | Cross-Community Access (query documents across organizations) |
-| **XCPD** | Cross-Community Patient Discovery (find patients across orgs) |
+| **XCA** | Cross-Community Access — covers Document Query (**DQ**) and Document Retrieve (**DR**) across organizations |
+| **XCPD** | Cross-Community Patient Discovery — Patient Discovery (**PD**), the "do you have this patient?" lookup |
 | **MHD** | Mobile access to Health Documents (FHIR-based XDS) |
 | **ATNA** | Audit Trail and Node Authentication |
 

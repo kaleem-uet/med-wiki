@@ -103,6 +103,57 @@ External Provider → Direct/Carequality/TEFCA → Kno2 Platform → Webhook to 
                                                               file in your system
 ```
 
+### Typical Flow: Querying for a Patient's Records (PD → DQ → DR)
+
+When you want to **pull** a patient's records from other organizations (instead of waiting for a push), you run the IHE-standard three-step query workflow. Every QHIN and HIE — including Kno2 — exposes some version of this.
+
+| Step | Acronym | IHE Profile | What It Does | Returns |
+|------|---------|-------------|--------------|---------|
+| 1 | **PD** | XCPD (Cross-Community Patient Discovery) | "Does anyone on the network have this patient?" | Match candidates + a remote patient ID per source |
+| 2 | **DQ** | XCA Query | "List all documents you have for that patient" | Metadata only (doc IDs, types, dates) — not the docs |
+| 3 | **DR** | XCA Retrieve | "Send me that specific document" | The actual CCDA / PDF |
+
+> **Analogy:** Think of it like **interacting with a remote git repo you've never cloned**: PD is `git ls-remote` (does this exist?), DQ is `git log` (what's in there?), DR is `git fetch <ref>` (give me the actual content). You can't skip a step — each one returns the handle the next one needs.
+
+#### How to do PD/DQ/DR through Kno2
+
+Kno2 wraps all three IHE profiles behind a REST API, so you call clean HTTPS endpoints instead of speaking SOAP/XCPD directly. The actual endpoint names depend on Kno2's API version — the shape below is illustrative:
+
+```http
+# 1. Patient Discovery — find the patient across the network
+POST /patient-discovery
+{
+  "givenName": "Jane",
+  "familyName": "Doe",
+  "birthDate": "1985-03-15",
+  "gender": "F",
+  "address": { "postalCode": "10001" }
+}
+→ 200 OK
+{
+  "matches": [
+    { "remotePatientId": "abc-123", "source": "HealthixHIE", "score": 0.92 }
+  ]
+}
+
+# 2. Document Query — list docs for the matched patient
+GET /document-query?patientId=abc-123&source=HealthixHIE
+→ 200 OK
+{
+  "documents": [
+    { "id": "doc-1", "type": "CCD",               "date": "2025-04-12" },
+    { "id": "doc-2", "type": "Discharge Summary", "date": "2025-05-20" }
+  ]
+}
+
+# 3. Document Retrieve — pull the actual document content
+GET /document-retrieve?documentId=doc-1&source=HealthixHIE
+→ 200 OK  (application/xml)
+<ClinicalDocument ...>...</ClinicalDocument>
+```
+
+> **Gotcha — patient matching is fuzzy.** PD may return zero, one, or several candidates. Most platforms surface a confidence score; pick a threshold (e.g. 0.9+) before auto-using a match, otherwise surface ambiguity to a human. Acting on a wrong match means you've pulled the wrong person's chart — a HIPAA incident.
+
 ---
 
 ## When to Use Kno2 vs Alternatives

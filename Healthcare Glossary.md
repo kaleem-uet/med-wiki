@@ -57,6 +57,8 @@ If you only learn ten, learn these — you'll hear them in every meeting, ticket
 |------|-----------|-----------|
 | **DICOM** | Digital Imaging and Communications in Medicine | Standard for medical images (X-rays, MRIs, CTs) |
 | **Direct** | Direct Messaging Protocol | Encrypted messaging protocol for sending clinical documents between providers |
+| **DQ** | Document Query | IHE XCA operation: list documents for a known patient on a remote network. Step 2 of PD → DQ → DR. |
+| **DR** | Document Retrieve | IHE XCA operation: fetch a specific document by ID. Step 3 of PD → DQ → DR. |
 
 ## E
 
@@ -130,6 +132,7 @@ If you only learn ten, learn these — you'll hear them in every meeting, ticket
 |------|-----------|-----------|
 | **PACS** | Picture Archiving and Communication System | System for storing/viewing medical images (DICOM) |
 | **PBM** | Pharmacy Benefit Manager | Company managing prescription drug benefits for insurers |
+| **PD** | Patient Discovery | IHE XCPD operation: "does this patient exist on the network?" Step 1 of PD → DQ → DR. |
 | **PHI** | Protected Health Information | Any health data + patient identifier. Protected by HIPAA. |
 | **PHR** | Personal Health Record | Patient-controlled health record (e.g., Apple Health, Google Health) |
 

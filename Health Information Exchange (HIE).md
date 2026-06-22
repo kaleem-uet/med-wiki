@@ -186,7 +186,7 @@ Most regional HIEs don't run their own QHIN — they connect to TEFCA through on
 - [[Direct Messaging Protocol]] for secure document delivery
 - FHIR APIs for modern HIE connections
 - CCDA for document exchange
-- IHE profiles (XDS, XCA, XCPD) for document sharing standards
+- IHE profiles (XDS, XCA, XCPD) for document sharing — federated HIE queries use the **PD → DQ → DR** sequence (Patient Discovery → Document Query → Document Retrieve). See [[Kno2]] for a worked PD/DQ/DR example.
 
 ---
 
