@@ -135,7 +135,7 @@ Other Organizations nationwide
 - You typically **don't connect directly to a QHIN** — you connect through a **Participant** or **Sub-Participant** that is part of a QHIN
 - QHINs handle identity proofing, patient matching across networks, and routing
 - Data exchanged follows **USCDI** (United States Core Data for Interoperability) — a defined set of data elements
-- Technically, exchanges use **IHE profiles** in a three-step **PD → DQ → DR** workflow (XCPD for Patient Discovery, then XCA for Document Query and Document Retrieve), and increasingly **FHIR**. See [[Kno2#typical-flow-querying-for-a-patients-records-pd--dq--dr]] for a worked example.
+- Technically, exchanges use **IHE profiles** in a three-step **PD → DQ → DR** workflow (XCPD for Patient Discovery, then XCA for Document Query and Document Retrieve), and increasingly **FHIR**. See [[Kno2]] (the "Querying for a Patient's Records" section) for a worked example.
 
 ---
 
