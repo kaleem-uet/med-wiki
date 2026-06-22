@@ -37,6 +37,7 @@ TEFCA establishes:
 ### TEFCA Exchange Purposes (What You Can Do)
 
 > **Analogy:** "Exchange Purposes" are like **OAuth scopes for inter-network queries**. Every TEFCA request has to declare *why* you're asking — for treatment, for billing, for public health, etc. — and the receiving system enforces that declared purpose. If you query under "Treatment" but actually use the data for marketing, that's a federal compliance violation. Always think about the purpose code as a hard scope, not a label.
+
 | Purpose | Description |
 |---------|-------------|
 | **Treatment** | Query/retrieve records for patient care |

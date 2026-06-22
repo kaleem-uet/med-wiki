@@ -61,6 +61,7 @@ But it's not regular email — it uses the [[Direct Messaging Protocol|Direct]] 
 ### Document Types Kno2 Handles
 
 > **Analogy:** Kno2 normalizes document types the way **Cloudinary normalizes images** — you POST whatever you have (CCDA XML, scanned PDF, an actual fax), and they hand you a clean representation on the other side. The fax-to-data feature is the surprising one: yes, faxes still flow through healthcare, and yes, Kno2 will OCR them into structured data for you.
+
 | Type | Format | Example |
 |------|--------|---------|
 | CCDA | XML | Continuity of Care Document, Referral Note |
