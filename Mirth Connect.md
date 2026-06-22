@@ -2,6 +2,8 @@
 
 > Mirth Connect is the most widely used **open-source integration engine** in healthcare. If you're moving HL7v2 messages, FHIR resources, or CCDA documents between systems, you'll likely use Mirth.
 
+> **Beginner primer:** Mirth is the tool you reach for when System A speaks HL7v2 and System B speaks FHIR (or files, or a database, or a different HL7v2 dialect). It's a Java-based server with a desktop UI where you drag-and-drop "channels" that listen, transform, and forward messages. Most healthcare IT shops have a Mirth (or a paid competitor like Rhapsody) somewhere in the data path. If you've used Logstash pipelines, n8n workflows, or Apache NiFi flows, you'll feel at home — same idea, more healthcare connectors, JavaScript instead of YAML for transformations.
+
 ## What It Is
 
 Mirth Connect (now officially "NextGen Connect Integration Engine") is middleware that:
@@ -36,6 +38,8 @@ Source (listener)  →  Filter  →  Transformer  →  Destination(s)
 - Destination 2: Write a copy to database for analytics
 
 ### Connectors (Source and Destination Types)
+
+> **Analogy:** Connectors are **the "Trigger" and "Action" blocks in Zapier**, but for healthcare protocols instead of SaaS apps. Each connector is just a configured I/O adapter — listen on a TCP port, poll a folder, hit an HTTP endpoint. Source connectors bring data in; destination connectors push it out.
 
 | Connector | Protocol | Use Case |
 |-----------|----------|----------|
@@ -98,6 +102,8 @@ return false;  // Drop it
 ```
 
 ### Message Statuses
+
+> **Analogy:** Message statuses are like **job states in Sidekiq, BullMQ, or Celery**. A message moves from `RECEIVED → TRANSFORMED → SENT` on the happy path, or sidetracks into `QUEUED` (retrying), `ERROR` (failed), or `FILTERED` (intentionally dropped). The Mirth dashboard is your job queue UI — you'll spend more time there than you expect.
 
 | Status | Meaning |
 |--------|---------|

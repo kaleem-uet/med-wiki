@@ -1,5 +1,7 @@
 # QHIN and TEFCA
 
+> **Beginner primer:** Before TEFCA, sharing health data nationally was like sending email between AOL and CompuServe in 1995 — possible in some cases, blocked in others, with no universal standard. TEFCA is the federal program that forces every major health network to interoperate, and QHINs are the eight or so "backbone" networks the program designated as the on-ramps. As a developer, you don't connect to TEFCA directly — you connect through a QHIN (or a participant who routes through one), the same way you don't connect to "the internet" but to an ISP.
+
 ## TEFCA — Trusted Exchange Framework and Common Agreement
 
 ### What It Is
@@ -33,6 +35,8 @@ TEFCA establishes:
 3. **QHINs** — The designated networks that implement the framework
 
 ### TEFCA Exchange Purposes (What You Can Do)
+
+> **Analogy:** "Exchange Purposes" are like **OAuth scopes for inter-network queries**. Every TEFCA request has to declare *why* you're asking — for treatment, for billing, for public health, etc. — and the receiving system enforces that declared purpose. If you query under "Treatment" but actually use the data for marketing, that's a federal compliance violation. Always think about the purpose code as a hard scope, not a label.
 | Purpose | Description |
 |---------|-------------|
 | **Treatment** | Query/retrieve records for patient care |
@@ -116,6 +120,8 @@ The **minimum dataset** that must be exchangeable under TEFCA and ONC regulation
 Adds: health insurance, sexual orientation, gender identity, SDOH (social determinants of health), tribal affiliation, treatment interventions, and more.
 
 **As a developer:** If you're building FHIR APIs, you need to support the USCDI data classes. US Core FHIR profiles map directly to USCDI.
+
+> **Analogy:** USCDI is **the "Schema.org" of US healthcare** — a standardized set of fields that every system must speak. The federal government picks the fields; ONC certification verifies you implement them; US Core FHIR profiles translate them into actual JSON. New USCDI versions add new required fields the way GDPR or PCI-DSS add new required controls — and old systems have to scramble to catch up.
 
 ---
 

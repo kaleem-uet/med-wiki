@@ -2,6 +2,8 @@
 
 > CCDA is the XML format used to exchange **clinical documents** between healthcare organizations in the US. If you're sending a discharge summary, referral note, or care summary across an organizational boundary, it's almost certainly a CCDA.
 
+> **Beginner primer:** When two hospitals need to share a patient's chart and a real-time API isn't available, they exchange a CCDA. It's the format you use when "send the whole discharge summary as one file" makes more sense than "let the other system query my data piece by piece." If FHIR is the live API, CCDA is the snapshot — a frozen, signed document representing what one provider knew about the patient at one moment in time.
+
 ## What It Is
 
 CCDA is a **constrained version of HL7 CDA** — an XML schema for self-contained clinical documents. A single CCDA file represents a whole document (e.g., one discharge summary for one patient on one date), not an event or an API response.

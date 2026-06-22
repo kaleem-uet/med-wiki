@@ -40,6 +40,8 @@ You integrate with Kno2's API, and they handle the network connectivity, certifi
 
 ## Kno2 as a QHIN
 
+> **Analogy:** Becoming a QHIN is like **becoming a Tier 1 internet backbone provider**. There are only ~8 in the country, the bar is high (capital, governance, technical certification), and once you're in, you peer with all the others. Smaller organizations connect to a QHIN the way a small ISP connects to a backbone — one upstream connection, global reach.
+
 Kno2 is a designated **QHIN** (Qualified Health Information Network) under [[QHIN and TEFCA|TEFCA]]. This means:
 - Organizations connecting through Kno2 can exchange data with other QHINs nationwide
 - Kno2 handles the TEFCA compliance, legal agreements, and technical requirements
@@ -57,6 +59,8 @@ But it's not regular email — it uses the [[Direct Messaging Protocol|Direct]] 
 > **Real-world example:** Your app needs to send a patient's referral letter to a specialist at another hospital. You POST a CCDA document to Kno2's API with the specialist's Direct address. Kno2 encrypts it, routes it through the Direct network, and the specialist's EHR receives it — all without you managing certificates or SMTP servers.
 
 ### Document Types Kno2 Handles
+
+> **Analogy:** Kno2 normalizes document types the way **Cloudinary normalizes images** — you POST whatever you have (CCDA XML, scanned PDF, an actual fax), and they hand you a clean representation on the other side. The fax-to-data feature is the surprising one: yes, faxes still flow through healthcare, and yes, Kno2 will OCR them into structured data for you.
 | Type | Format | Example |
 |------|--------|---------|
 | CCDA | XML | Continuity of Care Document, Referral Note |
